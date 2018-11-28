@@ -18,6 +18,9 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import '../../lib/mui/css/mui.min.css'
 import '../../lib/mui/css/icons-extra.css'
 
+// import { Navbar, TabItem } from 'mint-ui';
+
+
 var vm = new Vue({
     el:"#app",
     render:c=>c(app),

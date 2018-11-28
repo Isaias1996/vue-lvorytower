@@ -1,7 +1,5 @@
 <template>
-    <div>
-        <h3>我是Member</h3>
-    </div>
+    <router-view></router-view>
 </template>
 
 <script>

@@ -3,7 +3,9 @@
         <!--顶部header-->
         <mt-header fixed title="lvorytower"></mt-header>
         <!--中间路由-->
-        <router-view></router-view>
+        <transition name="app">
+            <router-view></router-view>
+        </transition>
         <!--底部Tabbar-->
         <nav class="mui-bar mui-bar-tab">
             <router-link class="mui-tab-item" to="/home">
@@ -46,5 +48,18 @@
         .mui-bar{
             box-shadow:0 0 1px rebeccapurple
         }
+    }
+    //切换动画
+    .app-enter{
+        opacity: 0;
+        transform: translateX(100%);
+    }
+    .app-leave-to{
+        opacity: 0;
+        position: absolute;
+        transform: translateX(-100%);
+    }
+    .app-enter-active,.app-leave-active{
+        transition: all 0.5s ease;
     }
 </style>
