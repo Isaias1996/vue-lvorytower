@@ -52,16 +52,18 @@
                     pwd_value:this.pwd
                 }
                 if(this.num && this.pwd){
-                    this.$http.post('http://127.0.0.1:5000/login',values).then(result =>{
+                    this.$http.post('/login',values).then(result =>{
                         if(result.body.err_code===0){
                             //登陆成功后的操作
-                            console.log(typeof result.body.err_code);
+                            console.log(document.cookie);
+                            console.log(result.body);
+//                            window.location.href = '/#/member/success';
                         }else {
                             //登陆不成功的操作
-                            then.pop = result.body.message;
-                            then.show = true;
+                            this.pop = result.body.message;
+                            this.show = true;
                             setTimeout(() => {
-                                then.show = false;
+                                this.show = false;
                             }, 2000);
                         }
                     })

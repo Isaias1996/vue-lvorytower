@@ -18,9 +18,13 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import '../../lib/mui/css/mui.min.css'
 import '../../lib/mui/css/icons-extra.css'
 
-// import { Navbar, TabItem } from 'mint-ui';
-
-
+Vue.http.interceptors.push(function(request, next) {//拦截器
+// 跨域携带cookie
+    request.credentials = true;
+    console.log(Vue.http.options);
+    next()
+});
+Vue.http.options.xhr = { withCredentials: true };
 var vm = new Vue({
     el:"#app",
     render:c=>c(app),

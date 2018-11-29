@@ -41,15 +41,15 @@ module.exports = {
                 }
             },
             {
-                test:/\.vue$/,
-                use:[
+                test: /\.vue$/,
+                use: [
                     'vue-loader'
                 ]
             },
             {
-                test:/\.scss$/,
-                use:[
-                    'style-loader','css-loader','sass-loader'
+                test: /\.scss$/,
+                use: [
+                    'style-loader', 'css-loader', 'sass-loader'
                 ]
             }
         ]
@@ -61,7 +61,29 @@ module.exports = {
         port:
             9000,
         hot:
-            true
+            true,
+        proxy: {
+            "/login": {
+                target: "http://127.0.0.1:5000",
+                pathRewrite: {"^/login": ""}
+            },
+            onProxyRes: function (proxyRes, req, res) {
+                var cookies = proxyRes.headers['set-cookie'];
+                var cookieRegex = /Path=\/XXX\//i;
+                //修改cookie Path
+                if (cookies) {
+                    var newCookie = cookies.map(function (cookie) {
+                        if (cookieRegex.test(cookie)) {
+                            return cookie.replace(cookieRegex, 'Path=/');
+                        }
+                        return cookie;
+                    });
+                    //修改cookie path
+                    delete proxyRes.headers['set-cookie'];
+                    proxyRes.headers['set-cookie'] = newCookie;
+                }
+            }
+        }
     },
     plugins: [
         new webpack.HotModuleReplacementPlugin(),
@@ -71,9 +93,9 @@ module.exports = {
         }),
         new VueLoaderPlugin()
     ],
-    resolve:{
-        alias:{
-            "vue$":"vue/dist/vue.js"
+    resolve: {
+        alias: {
+            "vue$": "vue/dist/vue.js"
         }
     }
 };
