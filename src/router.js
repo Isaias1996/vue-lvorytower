@@ -19,7 +19,7 @@ var router = new VueRouter({
     routes:[
         //重定向
         {path:'/',redirect:'/home'},
-        {path:'/member',redirect:'/member/land'},
+        {path:'/member',redirect:'/member/success'},
         //主页切换路由
         {path:'/home',component:Home},
         {path:'/member',component:Member,

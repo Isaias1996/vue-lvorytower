@@ -55,9 +55,7 @@
                     this.$http.post('/login',values).then(result =>{
                         if(result.body.err_code===0){
                             //登陆成功后的操作
-                            console.log(document.cookie);
-                            console.log(result.body);
-//                            window.location.href = '/#/member/success';
+                            window.location.href = '/#/member/success';
                         }else {
                             //登陆不成功的操作
                             this.pop = result.body.message;
